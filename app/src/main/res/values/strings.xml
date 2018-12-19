@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Falling Kitten</string>
+
+    <!-- app_id -->
+    <string name="app_id" translatable="false">238942432288</string>
+    <!-- package_name -->
+    <string name="package_name" translatable="false">com.android.lukaspetersson.fallingkitten</string>
+    <!-- leaderboard Leaderboard -->
+    <string name="leaderboard_id" translatable="false">CgkIoNjQkPoGEAIQAA</string>
+
+    <string name="status_exception_error">%1$s (status %2$d). %3$s.</string>
+</resources>
