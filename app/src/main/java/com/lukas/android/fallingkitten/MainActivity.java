@@ -1,18 +1,16 @@
-package com.android.lukaspetersson.fallingkitten;
+package com.lukas.android.fallingkitten;
 
-import android.graphics.Point;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.content.Intent;
+import android.graphics.Point;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import com.lukas.android.fallingkitten.R;
 
 public class MainActivity extends AppCompatActivity {
 

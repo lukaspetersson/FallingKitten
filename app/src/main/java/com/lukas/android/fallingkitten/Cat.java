@@ -1,4 +1,4 @@
-package com.android.lukaspetersson.fallingkitten;
+package com.lukas.android.fallingkitten;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -8,7 +8,10 @@ import android.support.constraint.ConstraintLayout;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
+import com.lukas.android.fallingkitten.R;
+
 import java.io.IOException;
+
 import pl.droidsonroids.gif.GifDrawable;
 
 

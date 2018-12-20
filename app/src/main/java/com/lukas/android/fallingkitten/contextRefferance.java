@@ -1,4 +1,4 @@
-package com.android.lukaspetersson.fallingkitten;
+package com.lukas.android.fallingkitten;
 
 import android.app.Application;
 import android.content.Context;
