@@ -443,7 +443,7 @@ public class Play extends AppCompatActivity {
 
         if(account != null){
             mLeaderboardsClient = Games.getLeaderboardsClient(contextRefferance.getAppContext(), account);
-            mLeaderboardsClient.submitScore("CgkIoNjQkPoGEAIQAA", pref.getInt("high_score", 0));
+            mLeaderboardsClient.submitScore(LEADERBOARDID, pref.getInt("high_score", 0));
         }
     }
 
