@@ -3,11 +3,11 @@
     <string name="app_name">Falling Kitten</string>
 
     <!-- app_id -->
-    <string name="app_id" translatable="false">238942432288</string>
+    <string name="app_id" translatable="false">APPID</string>
     <!-- package_name -->
     <string name="package_name" translatable="false">com.android.lukaspetersson.fallingkitten</string>
     <!-- leaderboard Leaderboard -->
-    <string name="leaderboard_id" translatable="false">CgkIoNjQkPoGEAIQAA</string>
+    <string name="leaderboard_id" translatable="false">LEADERBOARDID</string>
 
     <string name="status_exception_error">%1$s (status %2$d). %3$s.</string>
 </resources>
