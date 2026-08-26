@@ -284,16 +284,6 @@
         android:visibility="gone"
         android:id="@+id/game_over_screen">
 
-        <ImageView
-            android:id="@+id/leaderboard"
-            android:src="@drawable/gamecenter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:onClick="Leaderboard"/>
-
 
         <TextView
             android:id="@+id/game_over_lable"
@@ -334,7 +324,7 @@
             android:id="@+id/high_score_lable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="HIGH SCORE: 0"
+            android:text="@string/high_score_initial"
             app:layout_constraintBottom_toTopOf="@+id/return_home"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

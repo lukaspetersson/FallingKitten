@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Falling Kitten</string>
-
-    <!-- app_id -->
-    <string name="app_id" translatable="false">APPID</string>
-    <!-- package_name -->
-    <string name="package_name" translatable="false">com.android.lukaspetersson.fallingkitten</string>
-    <!-- leaderboard Leaderboard -->
-    <string name="leaderboard_id" translatable="false">LEADERBOARDID</string>
-
-    <string name="status_exception_error">%1$s (status %2$d). %3$s.</string>
+    <string name="high_score">HIGH SCORE: %1$d</string>
+    <string name="high_score_initial">HIGH SCORE: 0</string>
+    <string name="new_high_score">NEW HIGH SCORE: %1$d</string>
 </resources>

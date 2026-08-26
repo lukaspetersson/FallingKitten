@@ -3,7 +3,6 @@ package com.lukas.android.fallingkitten;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Point;
@@ -13,7 +12,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.appcompat.app.AppCompatActivity;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
@@ -22,15 +20,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lukas.android.fallingkitten.R;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.games.Games;
-import com.google.android.gms.games.LeaderboardsClient;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -73,15 +62,6 @@ public class Play extends AppCompatActivity {
     private TimerTask accelerator;
     private TimerTask spawner;
 
-    private static final int RC_LEADERBOARD_UI = 1005;
-    private static final int RC_SIGN_IN = 2005;
-    GoogleSignInOptions gso;
-    GoogleSignInClient mGoogleSignInClient;
-    private static LeaderboardsClient mLeaderboardsClient;
-    private static GoogleSignInAccount account;
-
-    private static final String LOG_TAG = Play.class.getName();
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
         setTheme(R.style.AppTheme);
@@ -107,15 +87,6 @@ public class Play extends AppCompatActivity {
         pref = getApplicationContext().getSharedPreferences("scorePref", MODE_PRIVATE);
         AudioMgr = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
 
-
-        // Configure sign-in to request the user's ID, email address, and basic
-        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestScopes(Games.SCOPE_GAMES_LITE)
-                .requestEmail()
-                .build();
-        // Build a GoogleSignInClient with the options specified by gso.
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         //get info if sound was on or off last time
         SoundOn = pref.getBoolean("sound", true);
@@ -369,14 +340,6 @@ public class Play extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        // Check for existing Google Sign In account, if the user is already signed in
-        // the GoogleSignInAccount will be non-null.
-        account = GoogleSignIn.getLastSignedInAccount(this);
-    }
-
-    @Override
     public void onStop() {
         if(pauseLayout.getVisibility() != View.VISIBLE && gameOverLayout.getVisibility() != View.VISIBLE){
             Pause(findViewById(R.id.pause_btn));
@@ -432,70 +395,12 @@ public class Play extends AppCompatActivity {
 
     }
     private static void handleHighscore(){
-        Editor editor = pref.edit();
-        if ( pref.getInt("high_score", 0)< score){
-            editor.putInt("high_score", score);
-            editor.apply();
-            highScore.setText("NEW HIGH SCORE!");
-        }else{
-            highScore.setText("HIGH SCORE: "+ pref.getInt("high_score", 0));
-        }
-
-        if(account != null){
-            mLeaderboardsClient = Games.getLeaderboardsClient(contextRefferance.getAppContext(), account);
-            mLeaderboardsClient.submitScore(LEADERBOARDID, score);
-        }
-    }
-
-    public void Leaderboard (View view){
-        if(account != null){
-            showLeaderboard();
-        }else{
-            Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-            startActivityForResult(signInIntent, RC_SIGN_IN);
-        }
-    }
-
-    private void showLeaderboard() {
-
-        mLeaderboardsClient = Games.getLeaderboardsClient(this, account);
-
-        mLeaderboardsClient.getLeaderboardIntent(getString(R.string.leaderboard_id))
-                .addOnSuccessListener(new OnSuccessListener<Intent>() {
-                    @Override
-                    public void onSuccess(Intent intent) {
-
-                        startActivityForResult(intent, RC_LEADERBOARD_UI);
-                    }
-                });
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-        }
-    }
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        try {
-            account = completedTask.getResult(ApiException.class);
-
-            mLeaderboardsClient = Games.getLeaderboardsClient(Play.this, account);
-
-            showLeaderboard();
-
-        } catch (ApiException e) {
-            mLeaderboardsClient = null;
-
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w(LOG_TAG, "signInResult:failed code=" + e.getStatusCode());
+        int savedHighScore = pref.getInt("high_score", 0);
+        if (savedHighScore < score) {
+            pref.edit().putInt("high_score", score).apply();
+            highScore.setText(highScore.getContext().getString(R.string.new_high_score, score));
+        } else {
+            highScore.setText(highScore.getContext().getString(R.string.high_score, savedHighScore));
         }
     }
 
