@@ -1,6 +1,6 @@
 FALLING KITTEN — THIRD-PARTY NOTICES
 
-This screen lists third-party software, a downloadable font, and credited audio used by Falling Kitten.
+This screen lists third-party software, bundled fonts, and credited audio used by Falling Kitten.
 
 ANDROIDX APPCOMPAT 1.7.1
 
@@ -23,14 +23,14 @@ Copyright © 2013–present Karol Wrótniak, Droids on Roids LLC. Licensed under
 Project: https://github.com/koral--/android-gif-drawable
 Source and license: https://github.com/koral--/android-gif-drawable/blob/master/LICENSE
 
-MONTSERRAT DOWNLOADABLE FONT
+MONTSERRAT FONT
 
-Montserrat is supplied at runtime by the Android downloadable-font provider com.google.android.gms.fonts. It is licensed under the SIL Open Font License 1.1.
+Montserrat Regular and Bold are bundled with the application and licensed under the SIL Open Font License 1.1.
 
 Copyright 2024 The Montserrat.Git Project Authors (https://github.com/JulietaUla/Montserrat.git).
 
 Font catalog: https://fonts.google.com/specimen/Montserrat
-Source and license: https://github.com/JulietaUla/Montserrat/blob/master/OFL.txt
+Source and license: https://github.com/JulietaUla/Montserrat/blob/555facfb2a18c72c3c0380f0d9c0f060453a9058/OFL.txt
 
 AUDIO CREDIT — CAT MEOW
 
