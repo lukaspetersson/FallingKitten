@@ -4,4 +4,11 @@
     <string name="high_score">HIGH SCORE: %1$d</string>
     <string name="high_score_initial">HIGH SCORE: 0</string>
     <string name="new_high_score">NEW HIGH SCORE: %1$d</string>
+    <string name="third_party_notices_title">Third-party notices</string>
+    <string name="open_source_licenses">Open-source licenses</string>
+    <string name="open_source_licenses_content_description">View open-source licenses and third-party notices</string>
+    <string name="third_party_notices_back">Back</string>
+    <string name="third_party_notices_back_content_description">Return to credits</string>
+    <string name="third_party_notices_content_description">Third-party notices and license text</string>
+    <string name="third_party_notices_load_error">Unable to load third-party notices.</string>
 </resources>

@@ -20,6 +20,10 @@ public class Credits extends AppCompatActivity {
         getSupportActionBar().hide();
     }
 
+    public void openThirdPartyNotices(View view) {
+        startActivity(new Intent(this, ThirdPartyNoticesActivity.class));
+    }
+
     public void Back (View view){
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
