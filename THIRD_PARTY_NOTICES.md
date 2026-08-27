@@ -27,14 +27,14 @@ MIT License. Copyright © 2013–present Karol Wrótniak, Droids on Roids LLC.
 Project: https://github.com/koral--/android-gif-drawable  
 Canonical source/license: https://github.com/koral--/android-gif-drawable/blob/master/LICENSE
 
-## Downloadable font used at runtime: Montserrat
+## Bundled font: Montserrat
 
-The current resources (`res/font/montserrat.xml` and `montserrat_bold.xml`) use the Android downloadable-font provider `com.google.android.gms.fonts`; no `.ttf` or `.otf` Montserrat file is present in the reviewed worktree. The provider supplies Montserrat at runtime rather than the APK bundling a font binary at build time. Montserrat is licensed under the SIL Open Font License 1.1. Copyright 2024 The Montserrat.Git Project Authors (https://github.com/JulietaUla/Montserrat.git).
+The application bundles unmodified Montserrat Regular and Bold font binaries from the official Montserrat repository at commit `555facfb2a18c72c3c0380f0d9c0f060453a9058`. They are licensed under the SIL Open Font License 1.1. Copyright 2024 The Montserrat.Git Project Authors (https://github.com/JulietaUla/Montserrat.git).
 
-Provider/catalog: https://fonts.google.com/specimen/Montserrat  
-Canonical font source/license: https://github.com/JulietaUla/Montserrat/blob/master/OFL.txt
+Canonical source: https://github.com/JulietaUla/Montserrat/tree/555facfb2a18c72c3c0380f0d9c0f060453a9058/fonts/ttf  
+License: https://github.com/JulietaUla/Montserrat/blob/555facfb2a18c72c3c0380f0d9c0f060453a9058/OFL.txt
 
-**Conditional treatment:** keep this Montserrat attribution and OFL notice when using the provider. If a future release bundles Montserrat font files, include the exact upstream `OFL.txt` alongside those binaries, preserve copyright/license metadata, identify any modifications, and obey the OFL reserved-font-name and redistribution conditions. Re-verify the copyright line and license from the exact font revision downloaded; do not assume this 2024 file describes a different binary revision.
+The exact upstream `OFL.txt` is packaged at `assets/licenses/montserrat-OFL.txt`; the full license text is also reproduced below. The font files were not modified.
 
 ## Audio used at runtime: “Cat Meow”
 
