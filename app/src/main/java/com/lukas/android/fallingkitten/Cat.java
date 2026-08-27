@@ -4,18 +4,22 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.media.MediaPlayer;
-import android.support.constraint.ConstraintLayout;
+import android.util.Log;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
 import com.lukas.android.fallingkitten.R;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import pl.droidsonroids.gif.GifDrawable;
 
 
 public class Cat {
+
+    private static final String TAG = "Cat";
 
     int position = 0;
     ImageView image;
@@ -176,14 +180,8 @@ public class Cat {
                     }
 
                     //set random meuw sound
-                    int randomMeow = (int)Math.floor(Math.random() * 3);
-                    if(randomMeow == 0){
-                        MediaPlayer.create(contextRefferance.getAppContext(), R.raw.meow1).start();
-                    }else if(randomMeow == 1){
-                        MediaPlayer.create(contextRefferance.getAppContext(), R.raw.meow2).start();
-                    }else{
-                        MediaPlayer.create(contextRefferance.getAppContext(), R.raw.meow3).start();
-                    }
+                    int randomMeow = (int)Math.floor(Math.random() * 2);
+                    playMeow(randomMeow == 0 ? R.raw.meow2 : R.raw.meow3);
 
                 }
                 deployed = false;
@@ -191,6 +189,41 @@ public class Cat {
         });
         animation.start();
         deployed = true;
+    }
+
+    private static void playMeow(int soundResource) {
+        final MediaPlayer player = MediaPlayer.create(
+                contextRefferance.getAppContext(), soundResource);
+        if (player == null) {
+            return;
+        }
+
+        final AtomicBoolean released = new AtomicBoolean(false);
+        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                releaseOnce(mediaPlayer, released);
+            }
+        });
+        player.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(MediaPlayer mediaPlayer, int what, int extra) {
+                releaseOnce(mediaPlayer, released);
+                return true;
+            }
+        });
+        try {
+            player.start();
+        } catch (RuntimeException exception) {
+            releaseOnce(player, released);
+            Log.w(TAG, "Unable to start meow playback", exception);
+        }
+    }
+
+    private static void releaseOnce(MediaPlayer player, AtomicBoolean released) {
+        if (released.compareAndSet(false, true)) {
+            player.release();
+        }
     }
 
 }

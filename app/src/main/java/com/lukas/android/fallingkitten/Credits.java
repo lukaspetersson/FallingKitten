@@ -2,7 +2,7 @@ package com.lukas.android.fallingkitten;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -18,6 +18,10 @@ public class Credits extends AppCompatActivity {
 
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
+    }
+
+    public void openThirdPartyNotices(View view) {
+        startActivity(new Intent(this, ThirdPartyNoticesActivity.class));
     }
 
     public void Back (View view){

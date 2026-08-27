@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Copyright © Axel Backlund 2015"
-        app:layout_constraintBottom_toTopOf="@+id/credits_back"
+        app:layout_constraintBottom_toTopOf="@+id/open_source_licenses"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/credits_info"
@@ -76,6 +76,19 @@
         android:textSize="15sp"
         android:textStyle="bold"
         android:fontFamily="@font/montserrat_bold"/>
+
+    <Button
+        android:id="@+id/open_source_licenses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:onClick="openThirdPartyNotices"
+        android:text="@string/open_source_licenses"
+        android:contentDescription="@string/open_source_licenses_content_description"
+        app:layout_constraintBottom_toTopOf="@+id/credits_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/credits_copyright" />
 
     <TextView
         android:id="@+id/credits_back"
@@ -86,10 +99,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/credits_copyright"
+        app:layout_constraintTop_toBottomOf="@+id/open_source_licenses"
         android:textColor="#4e4c4c"
         android:textSize="22sp"
         android:textStyle="bold"
         android:fontFamily="@font/montserrat_bold"/>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
