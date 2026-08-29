@@ -28,8 +28,11 @@ public class ThirdPartyNoticesSourceTest {
         assertTrue(notices.contains("ANDROIDX CONSTRAINTLAYOUT 2.2.1"));
         assertTrue(notices.contains("ANDROID GIF DRAWABLE 1.2.29"));
         assertTrue(notices.contains("MONTSERRAT FONT"));
-        assertTrue(notices.contains("AUDIO CREDIT — CAT MEOW"));
-        assertTrue(notices.contains("AUDIO CREDIT — KITTEN MEOW"));
+        assertTrue(notices.contains("APP-CREATED AUDIO — SYNTHETIC CAT MEOWS"));
+        assertTrue(notices.contains("02d02aac3d3a1459e60453119ce3299404b1f6bf12e76935a9a97014b04f6ced"));
+        assertTrue(notices.contains("812de6c2c1a6404b83fcc9ee3c3396a0908250028ee1d4c772082c62cd0250f0"));
+        assertFalse(notices.contains("SoundBible.com"));
+        assertFalse(notices.contains("Mike Koenig"));
     }
 
     @Test

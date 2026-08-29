@@ -58,19 +58,16 @@ Copyright 2024 The Montserrat.Git Project Authors (https://github.com/JulietaUla
 Font catalog: https://fonts.google.com/specimen/Montserrat
 Source and license: https://github.com/JulietaUla/Montserrat/blob/555facfb2a18c72c3c0380f0d9c0f060453a9058/OFL.txt
 
-AUDIO CREDIT — CAT MEOW
+APP-CREATED AUDIO — SYNTHETIC CAT MEOWS
 
-“Cat Meow” by Mike Koenig, obtained from SoundBible.com, licensed under Creative Commons Attribution 3.0.
+The packaged `meow2.mp3` and `meow3.mp3` files are deterministic synthetic audio created specifically for Falling Kitten on 2026-08-28. They replace the former third-party recordings; no third-party recording is packaged in this candidate.
 
-Source: https://soundbible.com/674-Cat-Meow.html
-License: https://creativecommons.org/licenses/by/3.0/
+Packaged file SHA-256 values:
 
-AUDIO CREDIT — KITTEN MEOW
+- `meow2.mp3`: `02d02aac3d3a1459e60453119ce3299404b1f6bf12e76935a9a97014b04f6ced`
+- `meow3.mp3`: `812de6c2c1a6404b83fcc9ee3c3396a0908250028ee1d4c772082c62cd0250f0`
 
-“Kitten Meow” by Mike Koenig, obtained from SoundBible.com, licensed under Creative Commons Attribution 3.0.
-
-Source: https://soundbible.com/1286-Kitten-Meow.html
-License: https://creativecommons.org/licenses/by/3.0/
+No third-party audio license applies to these replacement files.
 
 APACHE LICENSE 2.0
 
