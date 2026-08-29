@@ -1,6 +1,32 @@
 FALLING KITTEN — THIRD-PARTY NOTICES
 
+CANDIDATE STATUS
+
+This packaged file is the canonical notices source for this candidate and was reviewed for source-level alignment on 2026-08-27 and updated with the pinned volume-icon replacement on 2026-08-28. It is not a legal-clearance statement. Review remains open for the complete resolved transitive/native dependency set, runtime/visual cross-density and accessibility validation, written rights evidence for Axel-created code and artwork, signed-AAB contents and automated reachability, Play/PLR review, legal sufficiency, and Production approval.
+
 This screen lists third-party software, bundled fonts, and credited audio used by Falling Kitten.
+
+GOOGLE MATERIAL ICONS ROUND — VOLUME ICONS
+
+The volume-up and volume-off VectorDrawable resources are translations of Google Material Icons Round 24 px SVG sources. Modified for this app from SVG to Android VectorDrawable, with opaque white fill and 48dp dimensions. For Android parser safety, every SVG-style leading-decimal numeric token in pathData was normalized to explicit-zero form (for example, -.08 to -0.08 and .39 to 0.39), without changing numeric values, commands, order, fill, dimensions, viewport, resource basenames, or references. The exact normalized pathData values are:
+
+volume_up: `M3,10v4c0,0.55 0.45,1 1,1h3l3.29,3.29c0.63,0.63 1.71,0.18 1.71,-0.71V6.41c0,-0.89 -1.08,-1.34 -1.71,-0.71L7,9H4c-0.55,0 -1,0.45 -1,1zm13.5,2c0,-1.77 -1.02,-3.29 -2.5,-4.03v8.05c1.48,-0.73 2.5,-2.25 2.5,-4.02zM14,4.45v0.2c0,0.38 0.25,0.71 0.6,0.85C17.18,6.53 19,9.06 19,12s-1.82,5.47 -4.4,6.5c-0.36,0.14 -0.6,0.47 -0.6,0.85v0.2c0,0.63 0.63,1.07 1.21,0.85C18.6,19.11 21,15.84 21,12s-2.4,-7.11 -5.79,-8.4c-0.58,-0.23 -1.21,0.22 -1.21,0.85z`
+
+volume_off: `M3.63,3.63c-0.39,0.39 -0.39,1.02 0,1.41L7.29,8.7 7,9H4c-0.55,0 -1,0.45 -1,1v4c0,0.55 0.45,1 1,1h3l3.29,3.29c0.63,0.63 1.71,0.18 1.71,-0.71v-4.17l4.18,4.18c-0.49,0.37 -1.02,0.68 -1.6,0.91 -0.36,0.15 -0.58,0.53 -0.58,0.92 0,0.72 0.73,1.18 1.39,0.91 0.8,-0.33 1.55,-0.77 2.22,-1.31l1.34,1.34c0.39,0.39 1.02,0.39 1.41,0 0.39,-0.39 0.39,-1.02 0,-1.41L5.05,3.63c-0.39,-0.39 -1.02,-0.39 -1.42,0zM19,12c0,0.82 -0.15,1.61 -0.41,2.34l1.53,1.53c0.56,-1.17 0.88,-2.48 0.88,-3.87 0,-3.83 -2.4,-7.11 -5.78,-8.4 -0.59,-0.23 -1.22,0.23 -1.22,0.86v0.19c0,0.38 0.25,0.71 0.61,0.85C17.18,6.54 19,9.06 19,12zm-8.71,-6.29l-0.17,0.17L12,7.76V6.41c0,-0.89 -1.08,-1.33 -1.71,-0.7zM16.5,12c0,-1.77 -1.02,-3.29 -2.5,-4.03v1.79l2.48,2.48c0.01,-0.08 0.02,-0.16 0.02,-0.24z` Licensed under the Apache License, Version 2.0; the full license text appears below. No root upstream NOTICE file was found at the pinned commit.
+
+Repository: https://github.com/google/material-design-icons
+Pinned commit: 84ccef280841abfac506afc4ad4a2782f6d0a1d0
+License path: LICENSE
+License Git blob SHA-1: 7a4a3ea2424c09fbe48d455aed1eaa94d9124835
+License SHA-256: 58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd
+
+volume_up source path: src/av/volume_up/materialiconsround/24px.svg
+volume_up Git blob SHA-1: ed3b9e05cde06edf7ee7e5fc51bb9ba217032402
+volume_up source SHA-256: 0f6524fec9a2ddd04de1094082656779754df3e906691d2f9e4346835048d8f7
+
+volume_off source path: src/av/volume_off/materialiconsround/24px.svg
+volume_off Git blob SHA-1: b4781cc2e0a627aecdcc0d7569920f31fbd82bf3
+volume_off source SHA-256: 02df0aca3f04993a1d80bc09aae704b035a093915f625cbc36b98241ecbbdaf1
 
 ANDROIDX APPCOMPAT 1.7.1
 
@@ -32,23 +58,20 @@ Copyright 2024 The Montserrat.Git Project Authors (https://github.com/JulietaUla
 Font catalog: https://fonts.google.com/specimen/Montserrat
 Source and license: https://github.com/JulietaUla/Montserrat/blob/555facfb2a18c72c3c0380f0d9c0f060453a9058/OFL.txt
 
-AUDIO CREDIT — CAT MEOW
+APP-CREATED AUDIO — SYNTHETIC CAT MEOWS
 
-“Cat Meow” by Mike Koenig, obtained from SoundBible.com, licensed under Creative Commons Attribution 3.0.
+The packaged `meow2.mp3` and `meow3.mp3` files are deterministic synthetic audio created specifically for Falling Kitten on 2026-08-28. They replace the former third-party recordings; no third-party recording is packaged in this candidate.
 
-Source: https://soundbible.com/674-Cat-Meow.html
-License: https://creativecommons.org/licenses/by/3.0/
+Packaged file SHA-256 values:
 
-AUDIO CREDIT — KITTEN MEOW
+- `meow2.mp3`: `02d02aac3d3a1459e60453119ce3299404b1f6bf12e76935a9a97014b04f6ced`
+- `meow3.mp3`: `812de6c2c1a6404b83fcc9ee3c3396a0908250028ee1d4c772082c62cd0250f0`
 
-“Kitten Meow” by Mike Koenig, obtained from SoundBible.com, licensed under Creative Commons Attribution 3.0.
-
-Source: https://soundbible.com/1286-Kitten-Meow.html
-License: https://creativecommons.org/licenses/by/3.0/
+No third-party audio license applies to these replacement files.
 
 APACHE LICENSE 2.0
 
-Applies to the AndroidX runtime libraries identified above.
+Applies to the Google Material Icons Round derivatives and AndroidX runtime libraries identified above.
 
 Apache License
                            Version 2.0, January 2004
