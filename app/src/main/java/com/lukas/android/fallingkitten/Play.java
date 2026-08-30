@@ -27,28 +27,28 @@ import java.util.TimerTask;
 
 public class Play extends AppCompatActivity {
 
-    private static ConstraintLayout mainLayout;
+    private ConstraintLayout mainLayout;
     private ConstraintLayout pauseLayout;
-    private static ConstraintLayout gameOverLayout;
-    public static TextView scoreLable;
-    public static ImageView health1;
-    public static ImageView health2;
-    public static ImageView health3;
-    private static TextView highScore;
-    private static TextView finalScore;
+    private ConstraintLayout gameOverLayout;
+    private TextView scoreLable;
+    private ImageView health1;
+    private ImageView health2;
+    private ImageView health3;
+    private TextView highScore;
+    private TextView finalScore;
     private ImageView tutorial;
     private ImageView soundSwitchView;
     private boolean SoundOn;
-    static Timer tm;
-    private static boolean isTimerRunning;
-    private static Cat[] cats;
-    public static int score;
-    public static int health;
-    private static int current_cat;
-    public static int fall_time;
+    private Timer tm;
+    private boolean isTimerRunning;
+    private Cat[] cats;
+    private int score;
+    private int health;
+    private int current_cat;
+    private int fall_time;
     private long spawn_time;
-    public static float distance;
-    public static float screen_height;
+    private float distance;
+    private float screen_height;
     long last_spawn;
     long last_acc;
     long pause_time;
@@ -56,8 +56,8 @@ public class Play extends AppCompatActivity {
     long resume_time_acc;
     long delay_acc;
     long delay_spawn;
-    private static SharedPreferences pref;
-    private static AudioManager AudioMgr;
+    private SharedPreferences pref;
+    private AudioManager AudioMgr;
     private boolean first_task;
     private TimerTask accelerator;
     private TimerTask spawner;
@@ -102,9 +102,14 @@ public class Play extends AppCompatActivity {
         //initialize cat object aray
         cats = new Cat[10];
         for (int i = 0; i < 10; i++){
-            cats[i] = new Cat();
-            //link cat object to a image view
-            cats[i].image = findViewById(getResources().getIdentifier("cat" + i, "id", getPackageName()));
+            //link cat object to an image view and activity-scoped outcome callback
+            ImageView catImage = findViewById(getResources().getIdentifier("cat" + i, "id", getPackageName()));
+            cats[i] = new Cat(catImage, new Cat.OutcomeListener() {
+                @Override
+                public void onLanding(boolean upright) {
+                    handleLanding(upright);
+                }
+            });
         }
 
         //get screen height
@@ -158,7 +163,7 @@ public class Play extends AppCompatActivity {
                         resume_time_spawn=0;
                             //record time of spawn
                             last_spawn = System.currentTimeMillis();
-                            cats[current_cat % 10].spawn();
+                            cats[current_cat % 10].spawn(screen_height, fall_time, (int) distance);
                             current_cat++;
                     }
                 });
@@ -315,7 +320,26 @@ public class Play extends AppCompatActivity {
         pauseLayout.setVisibility(View.GONE);
     }
 
-    public static void GameOver(){
+    private void handleLanding(boolean upright) {
+        if (upright) {
+            score++;
+            scoreLable.setText(String.valueOf(score));
+            return;
+        }
+
+        health--;
+        ImageView lostHeart = health == 2 ? health3 : health == 1 ? health2 : health1;
+        int shrinkDuration = health == 2 ? 100 : 200;
+        int growDuration = health == 2 ? 200 : 100;
+        lostHeart.setImageResource(R.drawable.heart_empty);
+        lostHeart.animate().scaleX(0f).scaleY(0f).setDuration(shrinkDuration).withEndAction(
+                () -> lostHeart.animate().scaleX(1f).scaleY(1f).setDuration(growDuration));
+        if (health <= 0) {
+            GameOver();
+        }
+    }
+
+    private void GameOver(){
         cancelMovement();
         gameOverLayout.setVisibility(View.VISIBLE);
         finalScore.setText(score+"");
@@ -361,14 +385,14 @@ public class Play extends AppCompatActivity {
         super.onDestroy();
     }
 
-    public static void EnableMainScreen(boolean enable){
+    private void EnableMainScreen(boolean enable){
         for(int i=0;i<mainLayout.getChildCount();i++){
             View child=mainLayout.getChildAt(i);
             child.setEnabled(enable);
         }
     }
 
-    public static void cancelMovement(){
+    private void cancelMovement(){
         if (isTimerRunning) {
             tm.cancel();
             tm.purge();
@@ -394,7 +418,7 @@ public class Play extends AppCompatActivity {
         } ).start();
 
     }
-    private static void handleHighscore(){
+    private void handleHighscore(){
         int savedHighScore = pref.getInt("high_score", 0);
         if (savedHighScore < score) {
             pref.edit().putInt("high_score", score).apply();
