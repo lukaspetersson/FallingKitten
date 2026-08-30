@@ -27,7 +27,6 @@
             android:id="@+id/third_party_notices_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/third_party_notices_content_description"
             android:lineSpacingExtra="3dp"
             android:textColor="#212121"
             android:textIsSelectable="true"
