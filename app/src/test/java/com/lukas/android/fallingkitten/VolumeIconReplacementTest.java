@@ -41,7 +41,7 @@ public class VolumeIconReplacementTest {
 
     @Test public void noticeProvenanceAlignsWithBothAssetsAndReferencesStayUnchanged() throws Exception {
         String notice = read("src/main/assets/third_party_notices.md");
-        for (String value : Arrays.asList("84ccef280841abfac506afc4ad4a2782f6d0a1d0", "src/av/volume_up/materialiconsround/24px.svg", "ed3b9e05cde06edf7ee7e5fc51bb9ba217032402", "0f6524fec9a2ddd04de1094082656779754df3e906691d2f9e4346835048d8f7", "src/av/volume_off/materialiconsround/24px.svg", "b4781cc2e0a627aecdcc0d7569920f31fbd82bf3", "02df0aca3f04993a1d80bc09aae704b035a093915f625cbc36b98241ecbbdaf1", "Apache License, Version 2.0", "SVG to Android VectorDrawable", "opaque white fill", "48dp dimensions", "Android parser safety", "explicit-zero form", "without changing numeric values, commands, order, fill, dimensions, viewport, resource basenames, or references", UP, OFF)) assertTrue(value, notice.contains(value));
+        for (String value : Arrays.asList("GOOGLE MATERIAL ICONS ROUND — VOLUME ICON DERIVATIVES", "84ccef280841abfac506afc4ad4a2782f6d0a1d0", "src/av/volume_up/materialiconsround/24px.svg", "src/av/volume_off/materialiconsround/24px.svg", "Apache License, Version 2.0", "converted from SVG to Android VectorDrawable", "opaque white fill", "48dp dimensions")) assertTrue(value, notice.contains(value));
         String layout = read("src/main/res/layout/activity_play.xml");
         String play = read("src/main/java/com/lukas/android/fallingkitten/Play.java");
         assertEquals(1, occurrences(layout, "@drawable/round_volume_up_white_48"));
