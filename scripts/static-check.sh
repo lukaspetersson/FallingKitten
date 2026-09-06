@@ -50,12 +50,20 @@ assert manifest.count('android:exported="false"') >= 2
 assert 'getAssets().open("third_party_notices.md")' in notices_activity
 assert 'StandardCharsets.UTF_8' in notices_activity
 assert 'ScrollView' in notices_layout and 'closeNotices' in notices_layout
-assert 'CANDIDATE STATUS' in notices
-for required in ('ANDROIDX APPCOMPAT 1.7.1', 'ANDROIDX CONSTRAINTLAYOUT 2.2.1', 'ANDROID GIF DRAWABLE 1.2.29', 'MONTSERRAT FONT', 'AUDIO CREDIT — CAT MEOW', 'AUDIO CREDIT — KITTEN MEOW'):
+assert notices.startswith('Falling Kitten uses third-party software, fonts, and other materials.')
+for required in (
+    'GOOGLE MATERIAL ICONS ROUND — VOLUME ICON DERIVATIVES',
+    'ANDROIDX AND KOTLIN RUNTIME COMPONENTS',
+    'ANDROID GIF DRAWABLE 1.2.29 — INCLUDING NATIVE PAYLOAD',
+    'ANDROID GIF DRAWABLE v1.2.29 — UPSTREAM LICENSE AND EMBEDDED NOTICES',
+    'SKIA:', 'GIFLIB:', 'ReLinker:', 'memset.arm.S:',
+    'MONTSERRAT FONT', 'FIRST-PARTY SYNTHETIC AUDIO',
+    'APACHE LICENSE 2.0', 'SIL OPEN FONT LICENSE 1.1 — MONTSERRAT',
+):
     assert required in notices, required
-for unresolved in ('transitive/native', 'volume-icon', 'Axel-created', 'exact-AAB', 'legal sufficiency'):
-    assert unresolved in notices, unresolved
+assert 'Pinned upstream release tag: v1.2.29 (commit 7a4ee0fb8e32414a3b16b96fdc309defccff0688)' in notices
+assert 'JulietaUla/Montserrat commit 555facfb2a18c72c3c0380f0d9c0f060453a9058' in notices
 assert '`app/src/main/assets/third_party_notices.md`' in notice_pointer
 assert 'Do not maintain a second notice body here.' in notice_pointer
-print('Static checks passed: XML, identity/version, SDK/JDK/toolchain, AndroidX, exports/backup, offline high score, Credits notice route, canonical packaged notice, and explicit open gates.')
+print('Static checks passed: XML, identity/version, SDK/JDK/toolchain, AndroidX, exports/backup, offline high score, Credits notice route, canonical packaged notice, and durable license/provenance markers.')
 PY
