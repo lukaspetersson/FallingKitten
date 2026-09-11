@@ -3,6 +3,7 @@ package com.lukas.android.fallingkitten;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.util.Log;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -21,8 +22,15 @@ public class Cat {
 
     private static final String TAG = "Cat";
 
+    interface OutcomeListener {
+        void onLanding(boolean upright);
+    }
+
+    private final ImageView image;
+    private final OutcomeListener outcomeListener;
+    private final Context applicationContext;
+
     int position = 0;
-    ImageView image;
     boolean deployed = false;
     boolean inEnd = false;
     float distance = 0;
@@ -30,8 +38,17 @@ public class Cat {
     ObjectAnimator end_animation;
     int fall_distance;
     int fall_time;
+    private float screenHeight;
 
-    public void spawn (){
+
+    Cat(ImageView image, OutcomeListener outcomeListener) {
+        this.image = image;
+        this.outcomeListener = outcomeListener;
+        this.applicationContext = image.getContext().getApplicationContext();
+    }
+
+    public void spawn (float screenHeight, int configuredFallTime, int configuredDistance){
+        this.screenHeight = screenHeight;
         distance = 0;
 
         //set random rotation
@@ -72,9 +89,9 @@ public class Cat {
         image.setLayoutParams(params);
 
         //make image placed at top of screen
-        image.setY((float) -0.2*Play.screen_height);
+        image.setY((float) -0.2 * screenHeight);
 
-        animate(Play.fall_time, (int)Play.distance);
+        animate(configuredFallTime, configuredDistance);
     }
 
     public void animate (int t, int d){
@@ -97,92 +114,30 @@ public class Cat {
         animation.setInterpolator(new LinearInterpolator());
         animation.addListener(new AnimatorListenerAdapter() {
             public void onAnimationEnd(Animator animation) {
-                //if cat was correctly rotated
-                if(position %4 == 0){
-                    Play.score++;
-                    Play.scoreLable.setText(Play.score+"");
+                boolean upright = position % 4 == 0;
+                if (upright) {
+                    outcomeListener.onLanding(true);
                     end_animation.start();
                     inEnd = true;
-                }else{
-                    Play.health--;
-                    if(Play.health == 2){
-                        image.setRotation(0);
-                        //set explosion gif
-                        try {
-                            image.setImageDrawable(new GifDrawable(contextRefferance.getAppContext().getResources(), R.drawable.boom ));
-                        } catch(IOException ie) {
-                            ie.printStackTrace();
-                        }
-                        //make gif stop
-                        new Thread( new Runnable() {
-                            public void run()  {
-                                try  { Thread.sleep( 1100 ); }
-                                catch (InterruptedException ie)  {}
-                                image.setY((float) -0.2*Play.screen_height);
-                            }
-                        } ).start();
-
-                        //take away a heart
-                        Play.health3.setImageResource(R.drawable.heart_empty);
-                        Play.health3.animate().scaleX(0f).scaleY(0f).setDuration(100).withEndAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                Play.health3.animate().scaleX(1f).scaleY(1f).setDuration(200);
-                            }
-                        });
-                    }else if(Play.health == 1){
-                        image.setRotation(0);
-                        try {
-                            image.setImageDrawable(new GifDrawable(contextRefferance.getAppContext().getResources(), R.drawable.boom ));
-                        } catch(IOException ie) {
-                            ie.printStackTrace();
-                        }
-                        new Thread( new Runnable() {
-                            public void run()  {
-                                try  { Thread.sleep( 1100 ); }
-                                catch (InterruptedException ie)  {}
-                                image.setY((float) -0.2*Play.screen_height);
-                            }
-                        } ).start();
-
-                        Play.health2.setImageResource(R.drawable.heart_empty);
-                        Play.health2.animate().scaleX(0f).scaleY(0f).setDuration(200).withEndAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                Play.health2.animate().scaleX(1f).scaleY(1f).setDuration(100);
-                            }
-                        });
-                    }else{
-
-                        image.setRotation(0);
-                        try {
-                            image.setImageDrawable(new GifDrawable(contextRefferance.getAppContext().getResources(), R.drawable.boom ));
-                        } catch(IOException ie) {
-                            ie.printStackTrace();
-                        }
-                        new Thread( new Runnable() {
-                            public void run()  {
-                                try  { Thread.sleep( 1100 ); }
-                                catch (InterruptedException ie)  {}
-                                image.setY((float) -0.2*Play.screen_height);
-                            }
-                        } ).start();
-
-                        Play.health1.setImageResource(R.drawable.heart_empty);
-                        Play.health1.animate().scaleX(0f).scaleY(0f).setDuration(200).withEndAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                Play.health1.animate().scaleX(1f).scaleY(1f).setDuration(100);
-                            }
-                        });
-
-                        Play.GameOver();
+                } else {
+                    image.setRotation(0);
+                    try {
+                        image.setImageDrawable(new GifDrawable(
+                                applicationContext.getResources(), R.drawable.boom));
+                    } catch (IOException exception) {
+                        Log.w(TAG, "Unable to load explosion animation", exception);
                     }
-
-                    //set random meuw sound
-                    int randomMeow = (int)Math.floor(Math.random() * 2);
+                    new Thread(() -> {
+                        try {
+                            Thread.sleep(1100);
+                        } catch (InterruptedException exception) {
+                            Thread.currentThread().interrupt();
+                        }
+                        image.setY((float) -0.2 * screenHeight);
+                    }).start();
+                    outcomeListener.onLanding(false);
+                    int randomMeow = (int) Math.floor(Math.random() * 2);
                     playMeow(randomMeow == 0 ? R.raw.meow2 : R.raw.meow3);
-
                 }
                 deployed = false;
             }
@@ -191,9 +146,9 @@ public class Cat {
         deployed = true;
     }
 
-    private static void playMeow(int soundResource) {
+    private void playMeow(int soundResource) {
         final MediaPlayer player = MediaPlayer.create(
-                contextRefferance.getAppContext(), soundResource);
+                applicationContext, soundResource);
         if (player == null) {
             return;
         }

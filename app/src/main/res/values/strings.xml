@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Falling Kitten</string>
+    <string name="play">PLAY</string>
+    <string name="credits">CREDITS</string>
+    <string name="credits_creator">Designed, painted and\noriginally coded by Axel. \nCoded for Android by Lukas.</string>
+    <string name="credits_copyright">Copyright © Axel Backlund 2015</string>
+    <string name="back">BACK</string>
+    <string name="resume">RESUME</string>
+    <string name="restart">RESTART</string>
+    <string name="main_menu">MAIN MENU</string>
+    <string name="game_over">GAME OVER</string>
+    <string name="pause_content_description">Pause</string>
+    <string name="play_again_content_description">Play again</string>
+    <string name="main_menu_content_description">Main menu</string>
     <string name="high_score">HIGH SCORE: %1$d</string>
     <string name="high_score_initial">HIGH SCORE: 0</string>
     <string name="new_high_score">NEW HIGH SCORE: %1$d</string>
@@ -9,6 +21,5 @@
     <string name="open_source_licenses_content_description">View open-source licenses and third-party notices</string>
     <string name="third_party_notices_back">Back</string>
     <string name="third_party_notices_back_content_description">Return to credits</string>
-    <string name="third_party_notices_content_description">Third-party notices and license text</string>
     <string name="third_party_notices_load_error">Unable to load third-party notices.</string>
 </resources>
