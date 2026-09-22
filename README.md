@@ -1,5 +1,9 @@
 # Falling Kitten
 
+<a href="https://play.google.com/store/apps/details?id=com.lukas.android.fallingkitten">
+  <img src="https://lukaspetersson.com/lp-apps/social-falling-kitten.png" alt="Falling Kitten — reflex game and kattspel" width="720">
+</a>
+
 Falling Kitten is a small offline Android reflex game. Rotate each falling kitten so it lands on its feet, then try to beat the local high score.
 
 - [Get Falling Kitten on Google Play](https://play.google.com/store/apps/details?id=com.lukas.android.fallingkitten)
