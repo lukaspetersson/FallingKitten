@@ -12,8 +12,8 @@ Falling Kitten is a small offline Android reflex game. Rotate each falling kitte
 This repository contains the Android app. Use the checked-in Gradle wrapper:
 
 ```bash
-./gradlew test
-./gradlew assembleDebug
+bash ./gradlew test
+bash ./gradlew assembleDebug
 ```
 
 A local build is not evidence of the version currently published on Google Play.
