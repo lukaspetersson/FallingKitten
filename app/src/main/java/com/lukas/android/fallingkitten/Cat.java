@@ -5,6 +5,8 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import android.view.animation.LinearInterpolator;
@@ -127,14 +129,8 @@ public class Cat {
                     } catch (IOException exception) {
                         Log.w(TAG, "Unable to load explosion animation", exception);
                     }
-                    new Thread(() -> {
-                        try {
-                            Thread.sleep(1100);
-                        } catch (InterruptedException exception) {
-                            Thread.currentThread().interrupt();
-                        }
-                        image.setY((float) -0.2 * screenHeight);
-                    }).start();
+                    new Handler(Looper.getMainLooper()).postDelayed(
+                            () -> image.setY((float) -0.2 * screenHeight), 1100);
                     outcomeListener.onLanding(false);
                     int randomMeow = (int) Math.floor(Math.random() * 2);
                     playMeow(randomMeow == 0 ? R.raw.meow2 : R.raw.meow3);
