@@ -10,6 +10,7 @@ import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.TypedValue;
@@ -61,6 +62,7 @@ public class Play extends AppCompatActivity {
     private boolean first_task;
     private TimerTask accelerator;
     private TimerTask spawner;
+    private final ScheduleGeneration scheduleGeneration = new ScheduleGeneration();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -153,6 +155,8 @@ public class Play extends AppCompatActivity {
     }
 
     private void StartGame(){
+        assertMainThread();
+        final long scheduleToken = scheduleGeneration.activate();
 
         //spawn cats on schedule
         final Handler handler = new Handler();
@@ -160,6 +164,9 @@ public class Play extends AppCompatActivity {
             public void run() {
                 handler.post(new Runnable() {
                     public void run() {
+                        if (!scheduleGeneration.accepts(scheduleToken)) {
+                            return;
+                        }
                         resume_time_spawn=0;
                             //record time of spawn
                             last_spawn = System.currentTimeMillis();
@@ -175,6 +182,9 @@ public class Play extends AppCompatActivity {
             public void run() {
                 handler.post(new Runnable() {
                     public void run() {
+                        if (!scheduleGeneration.accepts(scheduleToken)) {
+                            return;
+                        }
                         //every 8th score simulate pause and resume to update timer schedule
                         if(score%8 == 1){
                             pause_time = System.currentTimeMillis();
@@ -393,6 +403,8 @@ public class Play extends AppCompatActivity {
     }
 
     private void cancelMovement(){
+        assertMainThread();
+        scheduleGeneration.invalidate();
         if (isTimerRunning) {
             tm.cancel();
             tm.purge();
@@ -400,23 +412,21 @@ public class Play extends AppCompatActivity {
             isTimerRunning = false;
         }
 
-        //wait 1ms before canceling animations
-        new Thread( new Runnable() {
-            public void run()  {
-                try  { Thread.sleep( 1 ); }
-                catch (InterruptedException ie)  {}
-                //pause animation of all cats
-                for(int i=0; i < 10; i++){
-                    if(cats[i].deployed){
-                        cats[i].animation.pause();
-                    }
-                    if(cats[i].inEnd){
-                        cats[i].end_animation.pause();
-                    }
-                }
+        // Animators are started on the main thread and must be paused there too.
+        for(int i=0; i < 10; i++){
+            if(cats[i].deployed){
+                cats[i].animation.pause();
             }
-        } ).start();
+            if(cats[i].inEnd){
+                cats[i].end_animation.pause();
+            }
+        }
+    }
 
+    private void assertMainThread() {
+        if (Looper.myLooper() != Looper.getMainLooper()) {
+            throw new IllegalStateException("Play schedule and animator control must run on the main thread");
+        }
     }
     private void handleHighscore(){
         int savedHighScore = pref.getInt("high_score", 0);
